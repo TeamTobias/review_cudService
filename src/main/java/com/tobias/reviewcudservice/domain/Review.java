@@ -5,6 +5,7 @@ import java.time.Instant;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.relational.core.mapping.Embedded;
 
 /**
  * A Review.
@@ -27,17 +28,8 @@ public class Review implements Serializable {
     @Field("created_at")
     private Instant createdAt;
 
-    @Field("userid")
-    private String userid;
-
-    @Field("name")
-    private String name;
-
-    @Field("weight")
-    private String weight;
-
-    @Field("height")
-    private String height;
+    @Embedded(onEmpty = null)
+    private UserVo userVo;
 
     @Field("catalogid")
     private String catalogid;
@@ -97,7 +89,7 @@ public class Review implements Serializable {
     }
 
     public String getUserid() {
-        return this.userid;
+        return this.userVo.getUserid();
     }
 
     public Review userid(String userid) {
@@ -106,11 +98,11 @@ public class Review implements Serializable {
     }
 
     public void setUserid(String userid) {
-        this.userid = userid;
+        this.userVo.setUserid(userid);
     }
 
     public String getName() {
-        return this.name;
+        return this.userVo.getName();
     }
 
     public Review name(String name) {
@@ -119,11 +111,11 @@ public class Review implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userVo.setName(name);
     }
 
     public String getWeight() {
-        return this.weight;
+        return this.userVo.getWeight();
     }
 
     public Review weight(String weight) {
@@ -132,11 +124,11 @@ public class Review implements Serializable {
     }
 
     public void setWeight(String weight) {
-        this.weight = weight;
+        this.userVo.setWeight(weight);
     }
 
     public String getHeight() {
-        return this.height;
+        return this.userVo.getHeight();
     }
 
     public Review height(String height) {
@@ -145,7 +137,7 @@ public class Review implements Serializable {
     }
 
     public void setHeight(String height) {
-        this.height = height;
+        this.userVo.setHeight(height);
     }
 
     public String getCatalogid() {
