@@ -32,7 +32,7 @@ spring:
       indent-output: true
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      uri: mongodb+srv://test:93414223@cluster0.3f1nxzq.mongodb.net/?retryWrites=true&w=majority
       database: reviewCudService
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
@@ -83,7 +83,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: NDBiOGVlZTE3YWVjZjgzYWY4ZDJjMWQ0NWEzZDhjMjY3ODAxN2VhNTk2YWU0ZjhjZDYwZTY2YmU5MmIxOWVkMTRkMjQ5YmQ1Y2UzNDZmYWQzMTA1NWQ2NzEyYmU3MGIzYjU4NjcyNmVjMDUxMTVkMDJhNWViNTMzODg5NmY3NjY=
+        base64-secret: YTQ5ZjFlOTAyMjkyYWRhNmUyOGRlNGZhNDcyMWQ1ZmY1MzAwY2NmMWJhYzI4OTkzMTYzOTdjMTgwNTk2M2I0ODEyMTM3ZDllMjZkZDY5ZjFmZTY4MDgyNGY4MTVhMzRlNGI2N2IxNGEzMzAxMzQxMGVhMWQ2MjkzZDZmYzcxOGI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

@@ -25,7 +25,7 @@
     <properties>
         <!-- Build properties -->
         <maven.version>3.2.5</maven.version>
-        <java.version>11</java.version>
+<!--        <java.version>11</java.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
@@ -90,6 +90,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>tech.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
@@ -219,6 +224,8 @@
             <version>${archunit-junit5.version}</version>
             <scope>test</scope>
         </dependency>
+
+
         <!-- Adding the engine dependency to the surefire-plugin unfortunately does not work in the current version. -->
         <!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->
         <dependency>
@@ -291,6 +298,12 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>compile</scope>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>

@@ -1,0 +1,46 @@
+{
+  "changelogDate": "20221206043758",
+  "clientRootFolder": "reviewCudService",
+  "databaseType": "mongodb",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "imgName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "userid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "weight",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "catalogid",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "reviewCudService",
+  "name": "Review",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}
