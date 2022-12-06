@@ -46,19 +46,15 @@ public class ReviewResource {
         this.reviewRepository = reviewRepository;
     }
 
-    /**
-     * {@code POST  /reviews} : Create a new review.
-     *
-     * @param reviewDTO the reviewDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new reviewDTO, or with status {@code 400 (Bad Request)} if the review has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("/reviews")
     public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO reviewDTO) throws URISyntaxException {
         log.debug("REST request to save Review : {}", reviewDTO);
-        if (reviewDTO.getId() != null) {
-            throw new BadRequestAlertException("A new review cannot already have an ID", ENTITY_NAME, "idexists");
-        }
+        if (reviewDTO.getId() != null) throw new BadRequestAlertException(
+            "A new review cannot already have an ID",
+            ENTITY_NAME,
+            "idexists"
+        );
+
         ReviewDTO result = reviewService.save(reviewDTO);
         return ResponseEntity
             .created(new URI("/api/reviews/" + result.getId()))
@@ -66,32 +62,15 @@ public class ReviewResource {
             .body(result);
     }
 
-    /**
-     * {@code PUT  /reviews/:id} : Updates an existing review.
-     *
-     * @param id the id of the reviewDTO to save.
-     * @param reviewDTO the reviewDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated reviewDTO,
-     * or with status {@code 400 (Bad Request)} if the reviewDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the reviewDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/reviews/{id}")
     public ResponseEntity<ReviewDTO> updateReview(
         @PathVariable(value = "id", required = false) final String id,
         @RequestBody ReviewDTO reviewDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Review : {}, {}", id, reviewDTO);
-        if (reviewDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, reviewDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!reviewRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
+        if (reviewDTO.getId() == null) throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        if (!Objects.equals(id, reviewDTO.getId())) throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        if (!reviewRepository.existsById(id)) throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
 
         ReviewDTO result = reviewService.update(reviewDTO);
         return ResponseEntity
@@ -100,33 +79,15 @@ public class ReviewResource {
             .body(result);
     }
 
-    /**
-     * {@code PATCH  /reviews/:id} : Partial updates given fields of an existing review, field will ignore if it is null
-     *
-     * @param id the id of the reviewDTO to save.
-     * @param reviewDTO the reviewDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated reviewDTO,
-     * or with status {@code 400 (Bad Request)} if the reviewDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the reviewDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the reviewDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/reviews/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ReviewDTO> partialUpdateReview(
         @PathVariable(value = "id", required = false) final String id,
         @RequestBody ReviewDTO reviewDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Review partially : {}, {}", id, reviewDTO);
-        if (reviewDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, reviewDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!reviewRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
+        if (reviewDTO.getId() == null) throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        if (!Objects.equals(id, reviewDTO.getId())) throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        if (!reviewRepository.existsById(id)) throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
 
         Optional<ReviewDTO> result = reviewService.partialUpdate(reviewDTO);
 
@@ -136,12 +97,6 @@ public class ReviewResource {
         );
     }
 
-    /**
-     * {@code GET  /reviews} : get all the reviews.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of reviews in body.
-     */
     @GetMapping("/reviews")
     public ResponseEntity<List<ReviewDTO>> getAllReviews(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Reviews");
@@ -150,12 +105,6 @@ public class ReviewResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    /**
-     * {@code GET  /reviews/:id} : get the "id" review.
-     *
-     * @param id the id of the reviewDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the reviewDTO, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/reviews/{id}")
     public ResponseEntity<ReviewDTO> getReview(@PathVariable String id) {
         log.debug("REST request to get Review : {}", id);
@@ -163,12 +112,6 @@ public class ReviewResource {
         return ResponseUtil.wrapOrNotFound(reviewDTO);
     }
 
-    /**
-     * {@code DELETE  /reviews/:id} : delete the "id" review.
-     *
-     * @param id the id of the reviewDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/reviews/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable String id) {
         log.debug("REST request to delete Review : {}", id);

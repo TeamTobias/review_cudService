@@ -28,7 +28,7 @@ public class Review implements Serializable {
     @Field("created_at")
     private Instant createdAt;
 
-    @Embedded(onEmpty = null)
+    @Embedded.Nullable
     private UserVo userVo;
 
     @Field("catalogid")
